@@ -23,6 +23,11 @@ export class UserController {
     return this.userService.createUserWithPofile(createUserDto);
   }
 
+  @Get("/all")
+  findAllUsersWithProfile(): Promise<User[]>{
+    return this.userService.findUserWithPofile();
+  }
+
   @Get()
   findAll(): Promise<User[]> {
     return this.userService.findAll();

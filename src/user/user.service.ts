@@ -45,6 +45,11 @@ export class UserService {
     return user;
   }
 
+
+  async findUserWithPofile():Promise<User[]> {
+    return this.userRepository.createQueryBuilder('user').leftJoinAndSelect('user.profile','profile').getMany();
+  }
+
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOne({
       where: { id },
