@@ -1,5 +1,5 @@
 import { User } from 'src/user/entities/user.entity';
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Profile {
@@ -12,6 +12,10 @@ export class Profile {
   @Column({ nullable: true })
   photo: string;
 
-  @OneToOne(() => User, (user) => user.profile)
+  @OneToOne(() => User, (user) => user.profile, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+@JoinColumn()
   user: User;
 }

@@ -21,8 +21,8 @@ export class ProfileController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): Promise<Profile> {
-    return this.findOne(id);
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Profile | null> {
+    return this.profileServices.findOne(id);
   }
 
   @Patch(':id')

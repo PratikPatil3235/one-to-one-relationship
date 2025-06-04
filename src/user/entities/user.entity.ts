@@ -21,10 +21,6 @@ export class User {
   @Column()
   email: string;
 
-  @OneToOne(() => Profile, (profile) => profile.user, {
-    cascade: true,
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn()
+  @OneToOne(() => Profile, (profile) => profile.user)
   profile: Profile;
 }
