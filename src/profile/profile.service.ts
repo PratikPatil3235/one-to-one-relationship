@@ -7,23 +7,23 @@ import { DeleteResult, Repository } from 'typeorm';
 
 @Injectable()
 export class ProfileService {
+  constructor(
+    @InjectRepository(Profile)
+    private readonly profileRepository: Repository<Profile>,
+  ) {}
 
-  constructor(@InjectRepository(Profile) private readonly profileRepository:Repository<Profile> ) {
-    
-  }
-
-  async create(createProfileDto: CreateProfileDto): Promise<Profile>{
+  async create(createProfileDto: CreateProfileDto): Promise<Profile> {
     let profile = new Profile();
     profile.gender = createProfileDto.gender;
     profile.photo = createProfileDto.photo;
-    return await this.profileRepository.save(profile)  ;
+    return await this.profileRepository.save(profile);
   }
 
-  findAll():Promise<Profile[]> {
+  findAll(): Promise<Profile[]> {
     return this.profileRepository.find();
   }
 
-  async findOne(id: number): Promise<Profile | null>{
+  async findOne(id: number): Promise<Profile | null> {
     const profile = await this.profileRepository.findOne({ where: { id } });
     if (!profile) {
       throw new NotFoundException(`Profile With id ${id} Not Found`);
@@ -31,8 +31,10 @@ export class ProfileService {
     return profile;
   }
 
-
-  async update(id: number, updateProfileDto: UpdateProfileDto):Promise<Profile>{
+  async update(
+    id: number,
+    updateProfileDto: UpdateProfileDto,
+  ): Promise<Profile> {
     const profile = await this.profileRepository.preload({
       id,
       ...updateProfileDto,
@@ -43,7 +45,7 @@ export class ProfileService {
     return this.profileRepository.save(profile);
   }
 
-  async remove(id: number) :Promise<DeleteResult>{
+  async remove(id: number): Promise<DeleteResult> {
     return this.profileRepository.delete(id);
   }
 }

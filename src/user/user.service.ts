@@ -50,7 +50,6 @@ export class UserService {
       where: { id },
       relations: ['profile'],
     });
-    
 
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);
@@ -62,7 +61,7 @@ export class UserService {
     return this.userRepository.save(user);
   }
 
-  remove(id: number):Promise<DeleteResult> {
+  remove(id: number): Promise<DeleteResult> {
     return this.userRepository.delete(id);
   }
 }

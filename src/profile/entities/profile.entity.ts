@@ -1,17 +1,17 @@
-import { User } from "src/user/entities/user.entity"
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm"
+import { User } from 'src/user/entities/user.entity';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Profile {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    gender: string;
+  @Column()
+  gender: string;
 
-    @Column({nullable:true})
-    photo: string;
+  @Column({ nullable: true })
+  photo: string;
 
-    @OneToOne(()=>User,(user)=>user.profile )
-    user: User;
+  @OneToOne(() => User, (user) => user.profile)
+  user: User;
 }
