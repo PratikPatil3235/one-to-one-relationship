@@ -6,6 +6,8 @@ import {
   Param,
   ParseIntPipe,
   Patch,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { Profile } from './entities/profile.entity';
@@ -13,6 +15,7 @@ import { UpdateProfileDto } from './dto/update-profile.dto';
 import { DeleteResult } from 'typeorm';
 
 @Controller('profile')
+@UsePipes(new ValidationPipe())
 export class ProfileController {
   constructor(private readonly profileServices: ProfileService) {}
   @Get()

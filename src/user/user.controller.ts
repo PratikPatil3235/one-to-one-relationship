@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -15,6 +17,7 @@ import { User } from './entities/user.entity';
 import { DeleteResult } from 'typeorm';
 
 @Controller('user')
+@UsePipes(new ValidationPipe())
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -23,8 +26,8 @@ export class UserController {
     return this.userService.createUserWithPofile(createUserDto);
   }
 
-  @Get("/all")
-  findAllUsersWithProfile(): Promise<User[]>{
+  @Get('/all')
+  findAllUsersWithProfile(): Promise<User[]> {
     return this.userService.findUserWithPofile();
   }
 
